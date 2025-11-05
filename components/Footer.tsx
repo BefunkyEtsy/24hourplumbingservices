@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { FacebookIcon, InstagramIcon, WrenchScrewdriverIcon } from './icons';
+import { FacebookIcon, InstagramIcon, WrenchScrewdriverIcon } from './icons.tsx';
 
 const Footer: React.FC = () => {
   return (

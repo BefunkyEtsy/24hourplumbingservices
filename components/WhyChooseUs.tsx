@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { CheckBadgeIcon, ClockIcon, ShieldCheckIcon, StarIcon, UserGroupIcon } from './icons';
+import { CheckBadgeIcon, ClockIcon, ShieldCheckIcon, StarIcon, UserGroupIcon } from './icons.tsx';
 
 const features = [
   { icon: <ClockIcon className="w-8 h-8 text-white" />, text: "True 24/7 Availability" },

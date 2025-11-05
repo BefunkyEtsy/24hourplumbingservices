@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { StarIcon } from './icons';
+import { StarIcon } from './icons.tsx';
 
 const testimonials = [
   { name: "Sarah J.", location: "City Centre", quote: "Called at 2 AM with a burst pipe. They were here in 45 minutes and stopped the flooding. Absolute lifesavers!", rating: 5 },

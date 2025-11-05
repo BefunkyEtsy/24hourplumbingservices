@@ -1,16 +1,15 @@
-
 import React from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import RapidResponse from './components/RapidResponse';
-import WhyChooseUs from './components/WhyChooseUs';
-import Testimonials from './components/Testimonials';
-import GetHelp from './components/GetHelp';
-import Team from './components/Team';
-import FAQ from './components/FAQ';
-import Resources from './components/Resources';
-import Footer from './components/Footer';
-import { PhoneIcon } from './components/icons';
+import Header from './components/Header.tsx';
+import Hero from './components/Hero.tsx';
+import RapidResponse from './components/RapidResponse.tsx';
+import WhyChooseUs from './components/WhyChooseUs.tsx';
+import Testimonials from './components/Testimonials.tsx';
+import GetHelp from './components/GetHelp.tsx';
+import Team from './components/Team.tsx';
+import FAQ from './components/FAQ.tsx';
+import Resources from './components/Resources.tsx';
+import Footer from './components/Footer.tsx';
+import { PhoneIcon } from './components/icons.tsx';
 
 const App: React.FC = () => {
   const phoneNumber = "07746644003";

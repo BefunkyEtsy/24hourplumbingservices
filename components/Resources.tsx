@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { LightBulbIcon } from './icons';
+import { LightBulbIcon } from './icons.tsx';
 
 const tips = [
   { title: "If you have a burst pipe...", content: "Turn off your main water supply immediately. The stopcock is usually under the kitchen sink or where the service pipe enters your home. Then, turn on all your cold taps to drain the system." },

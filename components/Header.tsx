@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { WrenchScrewdriverIcon, PhoneIcon } from './icons';
+import { WrenchScrewdriverIcon, PhoneIcon } from './icons.tsx';
 
 interface HeaderProps {
   phoneNumber: string;

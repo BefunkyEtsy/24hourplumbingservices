@@ -24,8 +24,9 @@
     <div id="root"></div>
     <!-- 
       - We change the type to "text/babel" to tell the Babel script to process this file.
+      - We add data-presets to configure Babel for React and TypeScript. THIS IS THE FIX.
       - The "data-type='module'" attribute ensures it's treated as a modern JS module.
     -->
-    <script type="text/babel" data-type="module" src="./index.tsx"></script>
+    <script type="text/babel" data-presets="react,typescript" data-type="module" src="./index.tsx"></script>
   </body>
 </html>

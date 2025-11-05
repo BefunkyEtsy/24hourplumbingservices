@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { PhoneIcon } from './icons';
+import { PhoneIcon } from './icons.tsx';
 
 interface HeroProps {
   phoneNumber: string;

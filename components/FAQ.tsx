@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { ChevronDownIcon, ChevronUpIcon } from './icons';
+import { ChevronDownIcon, ChevronUpIcon } from './icons.tsx';
 
 interface FAQItemProps {
   question: string;

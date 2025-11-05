@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { BoltIcon, WaterIcon, WrenchIcon, BlockIcon } from './icons';
+import { BoltIcon, WaterIcon, WrenchIcon, BlockIcon } from './icons.tsx';
 
 const scenarios = [
   { icon: <WaterIcon className="w-10 h-10 text-blue-500" />, title: "Burst Pipes & Leaks", description: "Immediate response to prevent water damage." },

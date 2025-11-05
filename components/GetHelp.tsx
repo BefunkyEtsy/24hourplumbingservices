@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { PhoneIcon, WhatsAppIcon } from './icons';
+import { PhoneIcon, WhatsAppIcon } from './icons.tsx';
 
 interface GetHelpProps {
   phoneNumber: string;
