@@ -9,23 +9,27 @@
     <!-- The Babel script will transpile our JSX/TSX code in the browser -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
+    <!--
+      THIS IS THE FIX: We are using standard, reliable 'unpkg' CDN links.
+      This ensures the browser can always download React and its libraries.
+    -->
     <script type="importmap">
-      {
-        "imports": {
-          "react": "https://aistudiocdn.com/react@^19.2.0",
-          "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-          "react/": "https://aistudiocdn.com/react@^19.2.0/",
-          "react/jsx-runtime": "https://aistudiocdn.com/react@^19.2.0/jsx-runtime"
-        }
-      }
-    </script>
+{
+  "imports": {
+    "react": "https://unpkg.com/react@19.0.0-rc.0/index.js",
+    "react-dom/client": "https://unpkg.com/react-dom@19.0.0-rc.0/client.js",
+    "react/jsx-runtime": "https://unpkg.com/react@19.0.0-rc.0/jsx-runtime.js",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
   </head>
   <body>
     <div id="root"></div>
-    <!-- 
-      - We change the type to "text/babel" to tell the Babel script to process this file.
-      - We add data-presets to configure Babel for React and TypeScript. THIS IS THE FIX.
-      - The "data-type='module'" attribute ensures it's treated as a modern JS module.
+    <!--
+      - This script tag correctly tells Babel to transpile our application's
+        entry point (`index.tsx`) using the React and TypeScript presets.
     -->
     <script type="text/babel" data-presets="react,typescript" data-type="module" src="./index.tsx"></script>
   </body>
