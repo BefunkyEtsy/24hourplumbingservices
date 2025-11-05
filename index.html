@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,29 +6,20 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>24 Hour Plumbing Services | Emergency Plumbers</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- The Babel script will transpile our JSX/TSX code in the browser -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <!-- This import map ONLY contains the correct, working links. -->
-    <script type="importmap">
+  <script type="importmap">
 {
   "imports": {
-    "react": "https://unpkg.com/react@19.0.0-rc.0/index.js",
-    "react-dom/client": "https://unpkg.com/react-dom@19.0.0-rc.0/client.js",
-    "react/jsx-runtime": "https://unpkg.com/react@19.0.0-rc.0/jsx-runtime.js",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "vite": "https://aistudiocdn.com/vite@^7.1.12",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.0"
   }
 }
 </script>
-  </head>
+</head>
   <body>
     <div id="root"></div>
-    <!--
-      - This script tag correctly tells Babel to transpile our application's
-        entry point (`index.tsx`) using the React and TypeScript presets.
-    -->
-    <script type="text/babel" data-presets="react,typescript" data-type="module" src="./index.tsx"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
