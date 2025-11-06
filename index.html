@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>24 Hour Plumbing Services | Emergency Plumbers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.0",
+    "vite": "https://aistudiocdn.com/vite@^7.2.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel" data-type="module">
+      const { useState, StrictMode } = React;
+
+      // --- ICONS ---
+      const PhoneIcon = (props) => (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+        </svg>
+      );
+      const WrenchScrewdriverIcon = (props) => (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.474-4.474c.036-.58.016-1.193-.14-1.743m-2.14-2.14a4.5 4.5 0 00-4.474-4.474c-.58-.036-1.193-.016-1.743.14m5.108 5.108c-.164.55-.188 1.163-.14 1.743a4.5 4.5 0 004.474 4.474c.58.036 1.193.016 1.743-.14m-2.14 2.14a4.5 4.5 0 00-4.474 4.474c-.58.036-1.193.016-1.743-.14" />
+        </svg>
+      );
+      const BoltIcon = (props) => (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+        </svg>
+      );
+      const WaterIcon = (props) => (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.62a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.458zM12 12V4.5" />
+        </svg>
+      );
+      const WrenchIcon = (props) => (
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17 4.565 20.823a2.548 2.548 0 1 1-3.586-3.586L8.23 9.882m8.162-1.928a4.5 4.5 0 0 0-6.364-6.364l-1.06 1.06m7.425 5.304 1.06-1.06m-7.425 5.304-1.06 1.06" />
+          </svg>
+      );
+      const BlockIcon = (props) => (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+        </svg>
+      );
+      const CheckBadgeIcon = (props) => (
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+      );
+      const ClockIcon = (props) => (
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+      );
+      const ShieldCheckIcon = (props) => (
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" />
+          </svg>
+      );
+      const StarIcon = (props) => (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+              <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.007z" clipRule="evenodd" />
+          </svg>
+      );
+      const UserGroupIcon = (props) => (
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.952a4.5 4.5 0 011.88-3.762A4.5 4.5 0 0118 15.75l-2.55-2.55m-7.5-2.952a4.5 4.5 0 00-1.88 3.762A4.5 4.5 0 0018 15.75l2.55-2.55m-7.5-2.952V21M12 3v3.75m-3.75 3.75a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+          </svg>
+      );
+      const WhatsAppIcon = (props) => (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+              <path d="M16.6 14.2c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.7-.8.9-.1.1-.3.2-.5.1-.2-.1-.9-.3-1.8-1.1-.7-.6-1.1-1.4-1.3-1.6-.1-.2 0-.4.1-.5.1-.1.2-.2.4-.4.1-.1.2-.2.3-.4.1-.2.1-.3 0-.4-.1-.1-.6-1.3-.8-1.8-.2-.5-.4-.4-.5-.4h-.4c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2 1 2.4.1.1 1.5 2.3 3.6 3.2.5.2.9.4 1.2.5.5.2 1 .1 1.3-.1.4-.2.6-.9.8-1.2.2-.2.2-.4.1-.5l-.3-.2zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"/>
+          </svg>
+      );
+      const ChevronDownIcon = (props) => (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+        </svg>
+      );
+      const ChevronUpIcon = (props) => (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+        </svg>
+      );
+      const LightBulbIcon = (props) => (
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.311a15.044 15.044 0 01-7.5 0C4.682 21.024 3 19.341 3 17.25c0-1.07.418-2.06 1.133-2.793a5.962 5.962 0 012.63-1.638m7.5 4.431A9 9 0 0118 17.25c0 2.091-1.682 3.774-3.75 3.774m-7.5-4.431a5.962 5.962 0 01-2.63-1.638A5.962 5.962 0 013 17.25m7.5 4.431V18" />
+          </svg>
+      );
+      const FacebookIcon = (props) => (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+          </svg>
+      );
+      const InstagramIcon = (props) => (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.644-.069 4.85-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.668-.072-4.948c-.198-4.354-2.617-6.78-6.98-6.979C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z" />
+          </svg>
+      );
+
+      // --- COMPONENTS ---
+      const Header = ({ phoneNumber }) => {
+        return (
+          <header className="bg-white shadow-md sticky top-0 z-40">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex justify-between items-center py-3">
+                <div className="flex items-center gap-2">
+                  <WrenchScrewdriverIcon className="w-8 h-8 text-blue-600" />
+                  <span className="text-xl md:text-2xl font-bold text-gray-800">24 Hour Plumbing</span>
+                </div>
+                <a href={`tel:${phoneNumber}`} className="hidden md:flex items-center gap-2 bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition-colors">
+                  <PhoneIcon className="w-5 h-5" />
+                  <span>{phoneNumber}</span>
+                </a>
+              </div>
+            </div>
+          </header>
+        );
+      };
+
+      const Hero = ({ phoneNumber }) => {
+        return (
+          <section className="relative bg-blue-800 text-white py-20 sm:py-28 md:py-32">
+            <div className="absolute inset-0 bg-cover bg-center opacity-20" style={{ backgroundImage: "url('https://picsum.photos/1200/800?blur=2&grayscale')" }}></div>
+            <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+              <a href={`tel:${phoneNumber}`} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight inline-block mb-4 p-3 bg-white text-blue-800 rounded-lg shadow-xl hover:scale-105 transition-transform">
+                Call Emergency Hotline: {phoneNumber}
+              </a>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tighter leading-tight mb-4">
+                Emergency Plumbers Available <span className="text-red-400">24/7</span>
+                <br className="hidden sm:block" />
+                Fast Response in Your City
+              </h1>
+              <p className="text-lg sm:text-xl md:text-2xl text-blue-200 max-w-3xl mx-auto mb-8">
+                15 Years’ Trusted Service — Local, Reliable, Safe
+              </p>
+              <a 
+                href={`tel:${phoneNumber}`} 
+                className="inline-block bg-red-600 text-white text-xl font-bold py-4 px-10 rounded-full shadow-lg hover:bg-red-700 transition-all transform hover:scale-110 duration-300 ease-in-out"
+              >
+                <div className="flex items-center gap-3">
+                  <PhoneIcon className="w-6 h-6" />
+                  <span>Get Emergency Help Now</span>
+                </div>
+              </a>
+            </div>
+          </section>
+        );
+      };
+
+      const RapidResponse = () => {
+        const scenarios = [
+          { icon: <WaterIcon className="w-10 h-10 text-blue-500" />, title: "Burst Pipes & Leaks", description: "Immediate response to prevent water damage." },
+          { icon: <WaterIcon className="w-10 h-10 text-blue-500" />, title: "Major Flooding", description: "Quick action to control and mitigate flooding." },
+          { icon: <BlockIcon className="w-10 h-10 text-blue-500" />, title: "Blocked Drains", description: "Clearing stubborn blockages fast." },
+          { icon: <WrenchIcon className="w-10 h-10 text-blue-500" />, title: "Boiler Breakdowns", description: "No heating or hot water? We'll fix it." },
+        ];
+
+        return (
+          <section className="py-16 sm:py-20 bg-gray-50">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold text-blue-800 mb-4">Our Rapid Response Promise</h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">We understand the urgency. Expect courteous, uniformed staff and clear, up-front pricing with no hidden fees.</p>
+              </div>
+              
+              <div className="flex justify-center mb-12">
+                <div className="bg-blue-600 text-white rounded-lg shadow-xl p-6 text-center animate-pulse w-full max-w-md">
+                  <div className="flex items-center justify-center gap-3 mb-2">
+                    <BoltIcon className="w-8 h-8"/>
+                    <span className="text-2xl font-bold">Time to Arrival</span>
+                  </div>
+                  <p className="text-4xl font-extrabold">Within 1 Hour!</p>
+                  <p className="text-sm opacity-90">(in most cases)</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                {scenarios.map((scenario, index) => (
+                  <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-xl transition-shadow">
+                    <div className="flex justify-center mb-4">{scenario.icon}</div>
+                    <h3 className="text-xl font-semibold text-gray-800 mb-2">{scenario.title}</h3>
+                    <p className="text-gray-600">{scenario.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      };
+
+      const WhyChooseUs = () => {
+        const features = [
+          { icon: <ClockIcon className="w-8 h-8 text-white" />, text: "True 24/7 Availability" },
+          { icon: <ShieldCheckIcon className="w-8 h-8 text-white" />, text: "Safety-First Repairs" },
+          { icon: <StarIcon className="w-8 h-8 text-white" />, text: "15+ Years' Experience" },
+          { icon: <UserGroupIcon className="w-8 h-8 text-white" />, text: "Certified Emergency Plumbers" },
+        ];
+
+        return (
+          <section className="py-16 sm:py-20 bg-blue-800 text-white">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold mb-4">Why Choose Us in an Emergency?</h2>
+                <p className="text-lg text-blue-200 max-w-3xl mx-auto">When disaster strikes, you need a team you can trust. We are dedicated to providing safe, reliable, and fast solutions.</p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {features.map((feature, index) => (
+                    <div key={index} className="flex items-center gap-4 bg-blue-700 p-4 rounded-lg">
+                      <div className="bg-blue-600 p-3 rounded-full">{feature.icon}</div>
+                      <span className="font-semibold text-lg">{feature.text}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="bg-blue-900/50 p-8 rounded-lg">
+                  <div className="flex items-start gap-4 mb-4">
+                    <CheckBadgeIcon className="w-10 h-10 text-green-400 flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="text-xl font-bold">Our Guarantee of Quality</h3>
+                      <p className="text-blue-200">All our emergency repairs are fully guaranteed. We stand by our workmanship, ensuring your peace of mind.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <ShieldCheckIcon className="w-10 h-10 text-green-400 flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="text-xl font-bold">Accredited & Insured</h3>
+                      <p className="text-blue-200">We are fully insured and accredited by leading industry bodies, so you can be sure you're in safe hands.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      };
+
+      const StarRating = ({ rating }) => {
+        return (
+          <div className="flex">
+            {[...Array(rating)].map((_, i) => (
+              <StarIcon key={i} className="w-5 h-5 text-yellow-400" />
+            ))}
+            {[...Array(5 - rating)].map((_, i) => (
+              <StarIcon key={i} className="w-5 h-5 text-gray-300" />
+            ))}
+          </div>
+        );
+      };
+
+      const Testimonials = () => {
+        const testimonials = [
+          { name: "Sarah J.", location: "City Centre", quote: "Called at 2 AM with a burst pipe. They were here in 45 minutes and stopped the flooding. Absolute lifesavers!", rating: 5 },
+          { name: "Mark T.", location: "West End", quote: "Professional, polite, and explained everything clearly. The price was exactly as quoted. Highly recommend.", rating: 5 },
+          { name: "Emily R.", location: "South Side", quote: "I was so stressed, but their calm and efficient manner really helped. The problem was fixed faster than I thought possible.", rating: 5 },
+        ];
+
+        return (
+          <section className="py-16 sm:py-20 bg-gray-50">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold text-blue-800 mb-4">What Our Customers Say</h2>
+                <p className="text-lg text-gray-600">We're proud of our fast, reliable, and professional service.</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {testimonials.map((testimonial, index) => (
+                  <div key={index} className="bg-white p-8 rounded-lg shadow-lg flex flex-col">
+                    <div className="mb-4">
+                      <StarRating rating={testimonial.rating} />
+                    </div>
+                    <p className="text-gray-700 italic flex-grow">"{testimonial.quote}"</p>
+                    <div className="mt-6">
+                      <p className="font-bold text-gray-800">{testimonial.name}</p>
+                      <p className="text-sm text-gray-500">{testimonial.location}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      };
+
+      const GetHelp = ({ phoneNumber }) => {
+        const [formData, setFormData] = useState({ name: '', postcode: '', issue: '', urgency: 'emergency' });
+        const [submitted, setSubmitted] = useState(false);
+
+        const handleChange = (e) => {
+          setFormData({ ...formData, [e.target.name]: e.target.value });
+        };
+
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          console.log('Form submitted:', formData);
+          setSubmitted(true);
+        };
+
+        return (
+          <section id="get-help" className="py-16 sm:py-20 bg-white">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold text-blue-800 mb-4">How to Get Help Fast</h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">Choose the method that's easiest for you. For the fastest response, please call us directly.</p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <div className="flex flex-col gap-6">
+                  <a href={`tel:${phoneNumber}`} className="w-full text-center bg-red-600 text-white p-6 rounded-lg shadow-lg hover:bg-red-700 transition-colors">
+                    <PhoneIcon className="w-10 h-10 mx-auto mb-3" />
+                    <span className="text-2xl font-bold block">Click to Call Now</span>
+                    <span className="block">{phoneNumber}</span>
+                  </a>
+                  <a href={`https://wa.me/${phoneNumber.replace(/^0/, '44')}`} target="_blank" rel="noopener noreferrer" className="w-full text-center bg-green-500 text-white p-6 rounded-lg shadow-lg hover:bg-green-600 transition-colors">
+                    <WhatsAppIcon className="w-10 h-10 mx-auto mb-3" />
+                    <span className="text-2xl font-bold block">Message on WhatsApp</span>
+                    <span className="block">Fast & Easy Contact</span>
+                  </a>
+                </div>
+                
+                <div className="bg-gray-50 p-8 rounded-lg shadow-inner">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-6">Or, Use Our Fast Web Form</h3>
+                  {submitted ? (
+                    <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded" role="alert">
+                      <p className="font-bold">Thank You!</p>
+                      <p>Your request has been received. We will call you back shortly to confirm.</p>
+                    </div>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" name="name" id="name" required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" value={formData.name} onChange={handleChange} />
+                      </div>
+                      <div>
+                        <label htmlFor="postcode" className="block text-sm font-medium text-gray-700">Postcode</label>
+                        <input type="text" name="postcode" id="postcode" required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" value={formData.postcode} onChange={handleChange} />
+                      </div>
+                      <div>
+                        <label htmlFor="issue" className="block text-sm font-medium text-gray-700">Describe the Issue</label>
+                        <textarea name="issue" id="issue" rows={3} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" value={formData.issue} onChange={handleChange}></textarea>
+                      </div>
+                       <div>
+                        <label htmlFor="urgency" className="block text-sm font-medium text-gray-700">Urgency</label>
+                          <select id="urgency" name="urgency" value={formData.urgency} onChange={handleChange} className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                              <option value="emergency">Emergency - I need help NOW</option>
+                              <option value="urgent">Urgent - Within 24 hours</option>
+                          </select>
+                      </div>
+                      <button type="submit" className="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-md hover:bg-blue-700 transition-colors">Request Emergency Call Back</button>
+                    </form>
+                  )}
+                   <p className="text-xs text-gray-500 mt-4">We respect your privacy and will never share your details. By submitting this form, you agree to our terms of service.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      };
+
+      const Team = () => {
+        const teamMembers = [
+          { name: "David", role: "Lead Emergency Engineer", bio: "With 15 years on the job, David has seen it all. He's an expert at diagnosing and fixing complex issues under pressure.", image: "https://picsum.photos/id/237/400/400" },
+          { name: "Maria", role: "Gas Safe & Heating Specialist", bio: "Maria is our go-to for boiler breakdowns and gas-related emergencies. Her priority is always your safety.", image: "https://picsum.photos/id/238/400/400" },
+          { name: "Tom", role: "Drainage & Blockage Expert", bio: "Tom specializes in high-pressure jetting and drain repairs, getting things flowing again in no time.", image: "https://picsum.photos/id/239/400/400" },
+        ];
+
+        return (
+          <section className="py-16 sm:py-20 bg-gray-50">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold text-blue-800 mb-4">Meet the Emergency Team</h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">Our friendly, experienced engineers are ready to help you, day or night.</p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {teamMembers.map((member, index) => (
+                  <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden text-center">
+                    <img src={member.image} alt={member.name} className="w-full h-56 object-cover" />
+                    <div className="p-6">
+                      <h3 className="text-2xl font-bold text-gray-800">{member.name}</h3>
+                      <p className="text-md font-semibold text-blue-600 mb-2">{member.role}</p>
+                      <p className="text-gray-600">{member.bio}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      };
+
+      const FAQItem = ({ question, answer }) => {
+        const [isOpen, setIsOpen] = useState(false);
+
+        return (
+          <div className="border-b border-gray-200">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="w-full flex justify-between items-center text-left py-4 px-2 hover:bg-gray-50 focus:outline-none"
+              aria-expanded={isOpen}
+            >
+              <span className="text-lg font-medium text-gray-800">{question}</span>
+              {isOpen ? <ChevronUpIcon className="w-6 h-6 text-blue-600" /> : <ChevronDownIcon className="w-6 h-6 text-gray-500" />}
+            </button>
+            {isOpen && (
+              <div className="p-4 bg-gray-50 text-gray-700">
+                <p>{answer}</p>
+              </div>
+            )}
+          </div>
+        );
+      };
+
+      const FAQ = () => {
+        const faqs = [
+          {
+            question: "How quickly can you get to me?",
+            answer: "Our goal is to be with you within one hour for all emergency callouts in our service area. Traffic and demand can sometimes affect this, but we will always give you an accurate ETA when you call."
+          },
+          {
+            question: "What counts as a plumbing emergency?",
+            answer: "An emergency is any plumbing issue that poses an immediate risk to your property or safety. This includes burst pipes, major leaks, flooding, sewage backups, and having no water at all."
+          },
+          {
+            question: "Are your prices transparent?",
+            answer: "Absolutely. We believe in up-front, honest pricing. We will explain the costs involved before any work begins, so there are no surprises. We have a clear emergency call-out fee and an hourly rate."
+          },
+          {
+            question: "What payment types do you accept?",
+            answer: "We accept all major credit and debit cards, as well as bank transfers. Payment is due upon completion of the work."
+          },
+          {
+            question: "Are your plumbers certified and insured?",
+            answer: "Yes, all our engineers are fully certified, insured, and highly experienced in emergency plumbing repairs. Your safety and property are our top priorities."
+          },
+        ];
+
+        return (
+          <section className="py-16 sm:py-20 bg-white">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold text-blue-800 mb-4">Frequently Asked Questions</h2>
+              </div>
+              <div className="max-w-3xl mx-auto">
+                {faqs.map((faq, index) => (
+                  <FAQItem key={index} question={faq.question} answer={faq.answer} />
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      };
+      
+      const Resources = () => {
+        const tips = [
+          { title: "If you have a burst pipe...", content: "Turn off your main water supply immediately. The stopcock is usually under the kitchen sink or where the service pipe enters your home. Then, turn on all your cold taps to drain the system." },
+          { title: "For a serious leak...", content: "Place a bucket under the leak to catch water. If the leak is near electrics, turn off your electricity at the fuse box if it's safe to do so. Do not touch wet electrical fittings." },
+          { title: "If a drain is blocked...", content: "Avoid using chemical drain cleaners as they can damage pipes. Do not flush toilets if you suspect a sewage backup, as this can cause flooding." },
+        ];
+
+        return (
+          <section className="py-16 sm:py-20 bg-gray-50">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold text-blue-800 mb-4">Helpful Resources</h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">What to do right now, before your plumber arrives.</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {tips.map((tip, index) => (
+                  <div key={index} className="bg-white p-8 rounded-lg shadow-md border-l-4 border-yellow-400">
+                    <div className="flex items-center gap-4 mb-4">
+                      <LightBulbIcon className="w-8 h-8 text-yellow-500" />
+                      <h3 className="text-xl font-bold text-gray-800">{tip.title}</h3>
+                    </div>
+                    <p className="text-gray-700">{tip.content}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      };
+
+      const Footer = () => {
+        return (
+          <footer className="bg-blue-900 text-blue-200 pt-16 pb-8 sm:pt-20">
+             <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div className="md:col-span-2">
+                  <div className="flex items-center gap-2 mb-4">
+                      <WrenchScrewdriverIcon className="w-8 h-8 text-white" />
+                      <h3 className="text-2xl font-bold text-white">24 Hour Plumbing Services</h3>
+                  </div>
+                  <p className="max-w-md">Your trusted local experts for all plumbing emergencies. Serving your city and surrounding areas 24/7, 365 days a year. Your safety is our priority.</p>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-white mb-4">Contact Info</h4>
+                  <ul className="space-y-2">
+                    <li><a href="tel:07746644003" className="hover:text-white">Phone: 07746644003</a></li>
+                    <li><a href="mailto:emergency@24hrplumbing.example.com" className="hover:text-white">Email: emergency@24hrplumbing.example.com</a></li>
+                    <li>Address: 123 Plumber Lane, Your City, PC1 2DE</li>
+                     <li><a href="#" className="hover:text-white">View on Map</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-white mb-4">Related Services</h4>
+                   <ul className="space-y-2">
+                    <li><a href="#" className="hover:text-white">Emergency Electrician</a></li>
+                    <li><a href="#" className="hover:text-white">Gas & Heating</a></li>
+                    <li><a href="#" className="hover:text-white">Drainage Services</a></li>
+                  </ul>
+                  <div className="flex gap-4 mt-4">
+                      <a href="#" aria-label="Facebook" className="hover:text-white"><FacebookIcon className="w-6 h-6" /></a>
+                      <a href="#" aria-label="Instagram" className="hover:text-white"><InstagramIcon className="w-6 h-6" /></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 border-t border-blue-800 pt-6 text-center text-sm">
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+                  <p>&copy; {new Date().getFullYear()} 24 Hour Plumbing Services. All Rights Reserved.</p>
+                  <div className="flex gap-4">
+                      <a href="#" className="hover:text-white">Privacy Policy</a>
+                      <a href="#" className="hover:text-white">Terms & Conditions</a>
+                  </div>
+              </div>
+            </div>
+          </footer>
+        );
+      };
+
+      // --- MAIN APP ---
+      const App = () => {
+        const phoneNumber = "07746644003";
+
+        return (
+          <div className="bg-white text-gray-800 font-sans antialiased">
+            <Header phoneNumber={phoneNumber} />
+            <main>
+              <Hero phoneNumber={phoneNumber} />
+              <RapidResponse />
+              <WhyChooseUs />
+              <Testimonials />
+              <GetHelp phoneNumber={phoneNumber} />
+              <Team />
+              <FAQ />
+              <Resources />
+            </main>
+            <Footer />
+            
+            {/* Sticky Mobile CTA */}
+            <div className="md:hidden fixed bottom-0 left-0 right-0 bg-red-600 text-white p-3 shadow-lg z-50 flex items-center justify-center">
+              <a href={`tel:${phoneNumber}`} className="flex items-center gap-3 text-lg font-bold">
+                <PhoneIcon className="w-6 h-6" />
+                <span>EMERGENCY? CALL NOW</span>
+              </a>
+            </div>
+          </div>
+        );
+      };
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(
+        <StrictMode>
+          <App />
+        </StrictMode>
+      );
+    </script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
